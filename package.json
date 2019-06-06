@@ -11,20 +11,27 @@
   "author": "Rilwan Adams",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.0.0",
-    "koa": "^2.7.0",
-    "koa-router": "^7.4.0"
+    "dotenv": "8.0.0",
+    "koa": "2.7.0",
+    "koa-router": "7.4.0"
   },
   "devDependencies": {
-    "@types/dotenv": "^6.1.1",
-    "@types/koa": "^2.0.48",
-    "@types/koa-router": "^7.0.40",
-    "@types/node": "10.0.0",
-    "del": "^4.1.1",
-    "gulp": "^4.0.2",
-    "gulp-typescript": "^5.0.1",
-    "nodemon": "^1.19.1",
-    "ts-loader": "^6.0.2",
-    "typescript": "^3.5.1"
+    "@types/dotenv": "6.1.1",
+    "@types/koa": "2.0.48",
+    "@types/koa-router": "7.0.40",
+    "@types/node": "10.16.0",
+    "del": "4.1.1",
+    "gulp": "4.0.2",
+    "gulp-typescript": "5.0.1",
+    "nodemon": "1.19.1",
+    "ts-loader": "6.0.2",
+    "typescript": "3.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dudewith3faces/nodejs-koa-starterpack"
+  },
+  "bugs": {
+    "url": "https://github.com/dudewith3faces/nodejs-koa-starterpack/issues"
   }
 }
