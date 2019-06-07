@@ -6,12 +6,12 @@ This is a startpack for a nodejs server running on Koa framework and koa-router 
 
 ## Installation
 
-- clone Repo## Nodejs server
-- npm i
-- Install gulp globally
+- clone Repo Nodejs
+- Run `npm i`
+- Install gulp globally with `npm install -g gulp`
 - create a ".env" file in the root folder and add a variable PORT with the port number you want the server to run on e.g PORT = 5000
-- compile TS to JS with gulp by running
-- node or nodemon dist/server.js or npm run strat or server or debug
+- compile TS to JS with gulp by running with `gulp`
+- `node dist/server.js` or `npm run start` or `npm run server` or `npm run debug`
 
 ## NOTE
 
