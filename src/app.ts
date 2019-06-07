@@ -6,7 +6,7 @@ export default class App {
   private readonly app = new Koa();
   private readonly api = new Api().route();
   constructor() {
-    this.middlerware();
+    this.middleware();
     this.route();
     this.listen();
     this.startApp();
@@ -16,7 +16,7 @@ export default class App {
     return this.app;
   }
 
-  private middlerware() {
+  private middleware() {
     this.app.use(setError);
   }
 
