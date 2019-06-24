@@ -1,4 +1,4 @@
-import { IResponse } from "../../types";
+import { IResponse } from "../../typings";
 
 export class CustomError implements Partial<Error> {
   constructor(

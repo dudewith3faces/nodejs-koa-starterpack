@@ -1,5 +1,5 @@
 import { BaseContext } from "koa";
-import { IResponse } from "../../types";
+import { IResponse } from "../../typings";
 
 export class AuthController {
   public static test(ctx: BaseContext) {
