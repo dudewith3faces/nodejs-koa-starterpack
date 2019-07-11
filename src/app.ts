@@ -1,6 +1,7 @@
 import * as Koa from "koa";
 import { PORT, setError } from "./config";
 import Api from "./routes/api";
+import Log from "./services/log/logger";
 
 export default class App {
   private readonly app = new Koa();
@@ -27,7 +28,9 @@ export default class App {
   private listen() {
     try {
       this.app.listen(PORT);
+      Log.successLog.info("Running Server on port " + PORT);
     } catch (e) {
+      Log.errorLog.error(e.message);
       throw e;
     }
   }
