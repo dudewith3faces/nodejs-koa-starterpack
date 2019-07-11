@@ -7,7 +7,6 @@ export const setError = async (ctx: BaseContext, next: () => Promise<any>) => {
   try {
     await next();
   } catch (e) {
-    console.log(e);
     if (e instanceof CustomError) {
       const { status, error } = e;
       ctx.status = status;

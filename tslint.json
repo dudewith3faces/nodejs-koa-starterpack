@@ -13,7 +13,6 @@
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": true,
-    "no-console": true,
     "trailing_comma": [
       true,
       {

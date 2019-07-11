@@ -1,14 +1,13 @@
 import { createLogger, format, transports } from "winston";
 import * as DailyRotateFile from "winston-daily-rotate-file";
 
-enum Levels {
-  error = 0,
-  warn,
-  info,
-  verbose,
-  debug,
-  silly,
-}
+const Levels = {
+  error: 0,
+  warn: 1,
+  debug: 2,
+  info: 3,
+  morgan: 4,
+};
 
 const log = {
   error: {
@@ -23,50 +22,75 @@ const log = {
 
 const { combine, timestamp, prettyPrint, colorize } = format;
 
-function createFile(err: boolean = false) {
-  let name: { dirname: string; filename: string };
-  if (!err) {
-    name = Object.assign({}, log.success);
-  } else {
-    name = Object.assign({}, log.error);
-  }
-  const opt: DailyRotateFile.DailyRotateFileTransportOptions = {
-    datePattern: "DD-MM-YYY",
-    ...name,
-    maxFiles: "14d",
-    maxSize: "20m",
-    zippedArchive: true,
-  };
-  return new DailyRotateFile(opt);
-}
+export default class Logger {
+  public static log = createLogger({
+    levels: Levels,
+    format: combine(timestamp(), prettyPrint()),
+    transports: [Logger.morgan()],
+  });
 
-const form = combine(timestamp(), prettyPrint());
-
-const consoleFormat = format.printf(function(info) {
-  return `${info.level}: ${info.message} -- ${new Date()
-    .toISOString()
-    .slice(0, 23)
-    .replace("T", "")}`;
-});
-
-export default class Log {
   public static errorLog = createLogger({
-    format: form,
+    format: Logger.format(),
     transports: [
       new transports.Console({
-        format: combine(colorize(), consoleFormat),
+        format: combine(colorize(), Logger.logFormat()),
       }),
-      createFile(true),
+      Logger.createFile(true),
     ],
   });
 
   public static successLog = createLogger({
-    format: form,
+    format: Logger.format(),
     transports: [
       new transports.Console({
-        format: combine(colorize(), consoleFormat),
+        format: combine(colorize(), Logger.logFormat()),
       }),
-      createFile(false),
+      Logger.createFile(false),
     ],
   });
+
+  private static morgan() {
+    return this.console("morgan");
+  }
+
+  private static console(level: string) {
+    return new transports.Console({
+      level,
+      format: combine(colorize(), Logger.logFormat()),
+    });
+  }
+
+  private static file() {}
+
+  private static createFile(err: boolean) {
+    let name: { dirname: string; filename: string };
+    if (!err) {
+      name = Object.assign({}, log.success);
+    } else {
+      name = Object.assign({}, log.error);
+    }
+    const opt: DailyRotateFile.DailyRotateFileTransportOptions = {
+      datePattern: "DD-MM-YYY",
+      ...name,
+      maxFiles: "14d",
+      maxSize: "20m",
+      zippedArchive: true,
+    };
+    return new DailyRotateFile(opt);
+  }
+
+  private static logFormat() {
+    const msg = format.printf(function(info) {
+      return `${info.level}: ${info.message} -- ${new Date()
+        .toISOString()
+        .slice(0, 23)
+        .replace("T", " ")}`;
+    });
+
+    return msg;
+  }
+
+  private static format() {
+    return combine(timestamp(), prettyPrint());
+  }
 }
