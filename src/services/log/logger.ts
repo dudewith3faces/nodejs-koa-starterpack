@@ -10,18 +10,29 @@ enum Levels {
   silly,
 }
 
-const logPath = {
-  error: __dirname + "../../../../Logs/error",
-  info: __dirname + "../../../../Logs/info",
+const log = {
+  error: {
+    dirname: __dirname + "../../../../Logs/error",
+    filename: "%DATE%-error.log",
+  },
+  success: {
+    dirname: __dirname + "../../../../Logs/info",
+    filename: "%DATE-server.log",
+  },
 };
 
 const { combine, timestamp, prettyPrint, colorize } = format;
 
-function createFile(path: string) {
+function createFile(err: boolean = false) {
+  let name: { dirname: string; filename: string };
+  if (!err) {
+    name = Object.assign({}, log.success);
+  } else {
+    name = Object.assign({}, log.error);
+  }
   const opt: DailyRotateFile.DailyRotateFileTransportOptions = {
     datePattern: "DD-MM-YYY",
-    dirname: path,
-    filename: "%DATE%.log",
+    ...name,
     maxFiles: "14d",
     maxSize: "20m",
     zippedArchive: true,
@@ -45,7 +56,7 @@ export default class Log {
       new transports.Console({
         format: combine(colorize(), consoleFormat),
       }),
-      createFile(logPath.error),
+      createFile(true),
     ],
   });
 
@@ -55,7 +66,7 @@ export default class Log {
       new transports.Console({
         format: combine(colorize(), consoleFormat),
       }),
-      createFile(logPath.info),
+      createFile(false),
     ],
   });
 }
