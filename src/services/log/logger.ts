@@ -14,12 +14,14 @@ const logPath = {
   error: __dirname + "../../../../Logs/error",
   info: __dirname + "../../../../Logs/info",
 };
+
 const { combine, timestamp, prettyPrint, colorize } = format;
 
 function createFile(path: string) {
   const opt: DailyRotateFile.DailyRotateFileTransportOptions = {
     datePattern: "DD-MM-YYY",
     dirname: path,
+    filename: "%DATE%.log",
     maxFiles: "14d",
     maxSize: "20m",
     zippedArchive: true,

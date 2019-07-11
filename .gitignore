@@ -1,5 +1,12 @@
 node_modules/
+.DS_Store
+.idea
 package-lock.json
 dist/
-.vscode/
-.env
+Logs/*
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
