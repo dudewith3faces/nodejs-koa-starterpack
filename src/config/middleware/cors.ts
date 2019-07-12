@@ -1,5 +1,8 @@
-import * as Cor from "koa2-cors";
+import * as Cors from "koa2-cors";
 
-const option: Cor.Options = {};
+const options: Cors.Options = {
+  allowHeaders: ["Content-Type", "Accept", "Authorization"],
+  allowMethods: ["GET", "PUT", "POST", "OPTIONS"],
+};
 
-export const cors = Cor(option);
+export const cors = Cors(options);

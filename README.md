@@ -19,11 +19,11 @@ This is a startpack for a nodejs server running on Koa framework.
 
   1. ENV -- default is "dev"
   2. server port -- default is 5000 and save as PORT in .env
-  3. color, and level for debug, error and http, and server using camelCase -- debugColor, debugPath.
+  3. color, and level for debug, error and http, and server using camelCase -- debugColor, debugLevel.
 
-- Manage options for cors, helmet and morgan in src/config/middleware
-- compile TS to JS with gulp by running `gulp`
-- `node dist/server.js` or `npm run start` or `npm run server` or `npm run debug`
+- Manage options for cors, helmet and morgan in their various file in src/config/middleware
+- compile TS to JS by running `gulp`
+- `node dist/server.js` or `npm run start` or `npm run server` or `npm run debug` for vscode
 
 ## NOTE
 
