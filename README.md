@@ -7,6 +7,9 @@ This is a startpack for a nodejs server running on Koa framework.
 ## Features
 
 - Logging
+  1. morgan log into a file
+  2. debug and error log functions log to console during development
+  3. No log to console in production
 - Cors
 - Helmet
 
