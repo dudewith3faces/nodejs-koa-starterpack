@@ -1,7 +1,7 @@
 import * as Koa from "koa";
-import { morgan, PORT, setError } from "./config";
+import { cors, helmet, morgan, PORT, setError } from "./config";
 import Api from "./routes/api";
-import Logger from "./services/log/logger";
+import { logger } from "./services";
 
 export default class App {
   private readonly app = new Koa();
@@ -18,8 +18,14 @@ export default class App {
   }
 
   private middleware() {
+    this.app.use(cors);
+    this.app.use(helmet);
     this.app.use(morgan);
     this.app.use(setError);
+  }
+
+  private end() {
+    this.app.on("close", (event) => logger.error(JSON.stringify(event)));
   }
 
   private route() {
@@ -29,9 +35,9 @@ export default class App {
   private listen() {
     try {
       this.app.listen(PORT);
-      Logger.log.info("Running Server on port " + PORT);
+      logger.info("Running Server on port " + PORT);
     } catch (e) {
-      Logger.log.error(e.message);
+      logger.error(e.message);
     }
   }
 }

@@ -3,7 +3,7 @@ node_modules/
 .idea
 package-lock.json
 dist/
-Logs/*
+Logs/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

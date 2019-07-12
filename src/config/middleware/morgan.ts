@@ -1,8 +1,8 @@
 import * as morg from "koa-morgan";
-import Logger from "../../services/log/logger";
+import { logger } from "../../services";
 
 export const morgan = morg("combined", {
   stream: {
-    write: (message) => Logger.log.info(message.trim()),
+    write: (message) => logger.http(message.trim()),
   },
 });

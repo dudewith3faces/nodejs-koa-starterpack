@@ -1,96 +1,117 @@
 import { createLogger, format, transports } from "winston";
 import * as DailyRotateFile from "winston-daily-rotate-file";
+import { env, logs } from "../../config";
 
-const Levels = {
-  error: 0,
+const levels = {
+  [logs.error.level]: 0,
   warn: 1,
-  debug: 2,
-  info: 3,
-  morgan: 4,
+  [logs.debug.level]: 2,
+  [logs.server.level]: 3,
+  [logs.http.level]: 4,
 };
 
-const log = {
-  error: {
-    dirname: __dirname + "../../../../Logs/error",
-    filename: "%DATE%-error.log",
-  },
-  success: {
-    dirname: __dirname + "../../../../Logs/info",
-    filename: "%DATE-server.log",
-  },
+const colors = {
+  [logs.error.level]: logs.error.color,
+  [logs.debug.level]: logs.debug.color,
+  [logs.server.level]: logs.server.color,
+  [logs.http.level]: logs.http.color,
 };
 
 const { combine, timestamp, prettyPrint, colorize } = format;
 
-export default class Logger {
-  public static log = createLogger({
-    levels: Levels,
-    format: combine(timestamp(), prettyPrint()),
-    transports: [Logger.morgan()],
-  });
-
-  public static errorLog = createLogger({
-    format: Logger.format(),
-    transports: [
-      new transports.Console({
-        format: combine(colorize(), Logger.logFormat()),
-      }),
-      Logger.createFile(true),
-    ],
-  });
-
-  public static successLog = createLogger({
-    format: Logger.format(),
-    transports: [
-      new transports.Console({
-        format: combine(colorize(), Logger.logFormat()),
-      }),
-      Logger.createFile(false),
-    ],
-  });
-
-  private static morgan() {
-    return this.console("morgan");
+class Logger {
+  private infoFunc: any;
+  private infoLevel: string;
+  constructor() {
+    this.run();
   }
 
-  private static console(level: string) {
-    return new transports.Console({
-      level,
-      format: combine(colorize(), Logger.logFormat()),
+  public error(message: string) {
+    this.log(this.errorTrans()).log(logs.error.level, message);
+  }
+
+  public info(message: string) {
+    this.log(this.infoFunc).log(this.infoLevel, message);
+  }
+
+  public http(message: string) {
+    this.log(this.httpTrans()).log(logs.http.level, message);
+  }
+
+  private errorTrans() {
+    const trans: any[] = [new DailyRotateFile({ ...this.opt, ...logs.error })];
+
+    if (env === "dev" || env === "development") {
+      trans.push(this.console(logs.error.level));
+    }
+
+    return trans;
+  }
+
+  private debugTrans() {
+    return [
+      new DailyRotateFile({ ...this.opt(), ...logs.debug }),
+      this.console(logs.debug.level),
+    ];
+  }
+
+  private serverTrans() {
+    return [new DailyRotateFile({ ...this.opt, ...logs.server })];
+  }
+
+  private httpTrans() {
+    return [new DailyRotateFile({ ...this.opt, ...logs.http })];
+  }
+
+  private log(trans: any[]) {
+    return createLogger({
+      format: combine(timestamp(), prettyPrint()),
+      levels,
+      transports: trans,
     });
   }
 
-  private static file() {}
-
-  private static createFile(err: boolean) {
-    let name: { dirname: string; filename: string };
-    if (!err) {
-      name = Object.assign({}, log.success);
+  private run() {
+    this.errorTrans();
+    this.httpTrans();
+    if (env === "dev" || env === "development") {
+      this.infoFunc = this.debugTrans();
+      this.infoLevel = logs.debug.level;
     } else {
-      name = Object.assign({}, log.error);
+      this.infoFunc = this.serverTrans();
+      this.infoLevel = logs.server.level;
     }
+  }
+
+  private console(level: string) {
+    return new transports.Console({
+      format: combine(colorize({ colors }), this.logFormat()),
+      level,
+    });
+  }
+
+  private opt() {
     const opt: DailyRotateFile.DailyRotateFileTransportOptions = {
-      datePattern: "DD-MM-YYY",
-      ...name,
+      // json: true,
+      datePattern: "YYYY-MM-DD",
       maxFiles: "14d",
       maxSize: "20m",
       zippedArchive: true,
     };
-    return new DailyRotateFile(opt);
+
+    return opt;
   }
 
-  private static logFormat() {
+  private logFormat() {
     const msg = format.printf(function(info) {
-      return `${info.level}: ${info.message} -- ${new Date()
+      return `${info.level} [${new Date()
         .toISOString()
         .slice(0, 23)
-        .replace("T", " ")}`;
+        .replace("T", " ")}]: ${info.message}`;
     });
 
     return msg;
   }
-
-  private static format() {
-    return combine(timestamp(), prettyPrint());
-  }
 }
+
+export const logger = new Logger();
