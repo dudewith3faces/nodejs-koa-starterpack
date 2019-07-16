@@ -20,7 +20,7 @@ This is a startpack for a nodejs server running on Koa framework.
 - Install gulp globally with `npm install -g gulp`
 - Create a ".env" file in the project root folder to change the following from the default:
 
-  1. ENV -- default is "dev"
+  1. NODE_ENV -- default is "dev"
   2. server port -- default is 5000 and save as PORT in .env
   3. color, and level for debug, error and http, and server using camelCase -- debugColor, debugLevel.
 

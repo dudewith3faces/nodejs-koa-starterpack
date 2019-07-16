@@ -1,6 +1,5 @@
 import { BaseContext } from "koa";
 import { CustomError } from "../../models";
-import { logger } from "../../services";
 import { IResponse } from "../../typings";
 
 export const setError = async (ctx: BaseContext, next: () => Promise<any>) => {
@@ -14,7 +13,8 @@ export const setError = async (ctx: BaseContext, next: () => Promise<any>) => {
     } else {
       const err = {} as IResponse;
       err.msg = "Error occured. Please try again later;";
-      logger.error(e.message);
+
+      ctx.app.emit("err", e);
 
       ctx.status = 500;
       ctx.body = err;
