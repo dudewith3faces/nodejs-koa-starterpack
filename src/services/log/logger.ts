@@ -41,7 +41,7 @@ class Logger {
   private errorTrans() {
     const trans: any[] = [new DailyRotateFile({ ...this.opt, ...logs.error })];
 
-    if (env === "dev" || env === "development") {
+    if (env === "dev") {
       trans.push(this.console(logs.error.level));
     }
 
@@ -74,7 +74,7 @@ class Logger {
   private run() {
     this.errorTrans();
     this.httpTrans();
-    if (env === "dev" || env === "development") {
+    if (env === "dev") {
       this.infoFunc = this.debugTrans();
       this.infoLevel = logs.debug.level;
     } else {
