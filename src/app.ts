@@ -17,7 +17,6 @@ export default class App {
     this.middleware();
     this.route();
     this.listen();
-    this.startApp();
   }
 
   private middleware() {
@@ -35,7 +34,7 @@ export default class App {
     (() => new CustomEvents())();
   }
 
-  public listen() {
+  private listen() {
     try {
       app.listen(PORT)
       EmitEvent.connected()
