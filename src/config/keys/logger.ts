@@ -2,7 +2,7 @@ import { join } from "path";
 
 const dir = (name?: string) =>
   join(__dirname, "..", "..", "..", "Logs", name.toLowerCase());
-const file = (name?: string) => "%DATE%-" + name.toLowerCase() + ".log";
+const file = (name?: string) => `%DATE%-${name.toLowerCase()}.log`;
 
 const logs = {
   debug: {

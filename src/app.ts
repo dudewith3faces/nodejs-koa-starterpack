@@ -1,6 +1,6 @@
 import { app, cors, helmet, morgan, PORT, setError } from "./config";
 import Api from "./routes/api";
-import { CustomEvents } from "./services";
+import { CustomEvents, EmitEvent } from "./services";
 
 export default class App {
   private readonly api = new Api().route();
@@ -9,7 +9,7 @@ export default class App {
   }
 
   public startApp() {
-    return app;
+    return app
   }
 
   private build() {
@@ -35,12 +35,12 @@ export default class App {
     (() => new CustomEvents())();
   }
 
-  private listen() {
+  public listen() {
     try {
-      app.listen(PORT);
-      app.emit("connected");
+      app.listen(PORT)
+      EmitEvent.connected()
     } catch (e) {
-      app.emit("err", e);
+      EmitEvent.error(e)
     }
   }
 }

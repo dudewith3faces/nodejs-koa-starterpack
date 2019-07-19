@@ -2,6 +2,6 @@ import { config } from "dotenv";
 
 config();
 
-export * from "./email";
-export * from "./logger";
+export {emails} from "./email";
+export {logs} from "./logger";
 export * from "./server";
