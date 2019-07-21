@@ -1,5 +1,5 @@
-import App from "./app";
+import App from './app';
 
-const app = new App().startApp();
+const server = new App().startApp();
 
-export { app };
+export { server };

@@ -1,7 +1,7 @@
-import { config } from "dotenv";
+import { config } from 'dotenv';
 
 config();
 
-export {emails} from "./email";
-export {logs} from "./logger";
-export * from "./server";
+export { emails } from './email';
+export { logs } from './logger';
+export { PORT, env, hostname } from './server';

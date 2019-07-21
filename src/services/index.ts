@@ -1,3 +1,3 @@
-export { CustomEvents } from "./event/CustomEvents";
-export { EmitEvent } from "./event/EmitEvent"
+export { Events } from "./event/Events";
+export { Emit } from "./event/Emit"
 export { logger } from "./log/logger";

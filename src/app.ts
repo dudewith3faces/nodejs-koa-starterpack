@@ -1,6 +1,15 @@
-import { app, cors, helmet, morgan, PORT, setError } from "./config";
-import Api from "./routes/api";
-import { CustomEvents, EmitEvent } from "./services";
+import {
+  app,
+  cors,
+  helmet,
+  hostname,
+  httpsRedirect,
+  morgan,
+  PORT,
+  setError,
+} from './config';
+import Api from './routes/api';
+import { Emit, Events } from './services';
 
 export default class App {
   private readonly api = new Api().route();
@@ -9,7 +18,7 @@ export default class App {
   }
 
   public startApp() {
-    return app
+    return app;
   }
 
   private build() {
@@ -20,6 +29,7 @@ export default class App {
   }
 
   private middleware() {
+    app.use(httpsRedirect);
     app.use(cors);
     app.use(helmet);
     app.use(morgan);
@@ -31,15 +41,15 @@ export default class App {
   }
 
   private event() {
-    (() => new CustomEvents())();
+    (() => new Events())();
   }
 
   private listen() {
     try {
-      app.listen(PORT)
-      EmitEvent.connected()
+      app.listen(PORT, hostname);
+      Emit.connected();
     } catch (e) {
-      EmitEvent.error(e)
+      Emit.error(e);
     }
   }
 }

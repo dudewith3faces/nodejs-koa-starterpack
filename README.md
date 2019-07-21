@@ -30,4 +30,4 @@ This is a startpack for a nodejs server running on Koa framework.
 
 ## NOTE
 
-- Use the CustomError class to create Http error when handling error
+- Use the HTTPError class to create Http error when handling error

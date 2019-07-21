@@ -1,10 +1,39 @@
 {
-  "extends":["tslint:recommended", "tslint-config-airbnb"],
+  "extends": ["tslint:recommended"],
   "linterOptions": {
-    "exclude": ["node_modules", "dist"]
+    "exclude": ["node_modules"]
   },
   "rules": {
+    "max-line-length": {
+      "options": [100]
+    },
     "prettier": true,
-    "quotemark": [true, "single"]
+    "quotemark": [true, "single"],
+    "new-parens": true,
+    "ordered-imports": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-conditional-assignment": true,
+    "no-consecutive-blank-lines": true,
+    "no-console": true,
+    "trailing_comma": [
+      true,
+      {
+        "singleline": "always",
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "always",
+          "typeLiterals": "always"
+        }
+      }
+    ],
+    "only-arrow-functions": false,
+    "object-literal-sort-keys": true
+  },
+  "jsRules": {
+    "max-line-length": {
+      "options": [120]
+    }
   }
 }

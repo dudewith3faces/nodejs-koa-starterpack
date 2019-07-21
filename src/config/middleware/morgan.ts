@@ -1,8 +1,8 @@
-import * as Morgan from "koa-morgan";
-import {EmitEvent} from "../../services"
+import * as Morgan from 'koa-morgan';
+import { Emit } from '../../services';
 
-export const morgan = Morgan("combined", {
+export const morgan = Morgan('combined', {
   stream: {
-    write: (message) => EmitEvent.http(message),
+    write: (message) => Emit.http(message),
   },
 });

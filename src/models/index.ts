@@ -1,1 +1,1 @@
-export { CustomError } from "./others/CustomError";
+export { HTTPError } from './others/HTTPError';
