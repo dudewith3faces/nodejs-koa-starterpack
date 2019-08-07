@@ -7,7 +7,7 @@
     "start": "node dist/server.js",
     "server": "nodemon dist/server.js",
     "debug": "nodemon --inspect dist/server.js",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts --exit || true"
+    "test": "mocha -r ts-node/register test/**/*.ts --exit || true"
   },
   "author": "Rilwan Adams <adamzrealone@gmail.com>",
   "license": "ISC",
