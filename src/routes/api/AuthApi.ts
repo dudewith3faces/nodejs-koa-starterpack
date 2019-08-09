@@ -22,7 +22,11 @@ export default class AuthApi {
     this.router.get('/test', AuthController.test);
   }
 
-  private post() {}
+  private post() {
+    // put post routes here
+  }
 
-  private delete() {}
+  private delete() {
+    // put delete routes here
+  }
 }

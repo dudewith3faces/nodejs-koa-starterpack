@@ -1,6 +1,6 @@
-import { createLogger, format, transports } from "winston";
-import * as DailyRotateFile from "winston-daily-rotate-file";
-import { env, logs } from "../../config";
+import { createLogger, format, transports } from 'winston';
+import * as DailyRotateFile from 'winston-daily-rotate-file';
+import { env, logs } from '../../config';
 
 const levels = {
   [logs.error.level]: 0,
@@ -41,7 +41,7 @@ class Logger {
   private errorTrans() {
     const trans: any[] = [new DailyRotateFile({ ...this.opt, ...logs.error })];
 
-    if (env === "dev") {
+    if (env === 'dev') {
       trans.push(this.console(logs.error.level));
     }
 
@@ -74,7 +74,7 @@ class Logger {
   private run() {
     this.errorTrans();
     this.httpTrans();
-    if (env === "dev") {
+    if (env === 'dev') {
       this.infoFunc = this.debugTrans();
       this.infoLevel = logs.debug.level;
     } else {
@@ -93,9 +93,9 @@ class Logger {
   private opt() {
     const opt: DailyRotateFile.DailyRotateFileTransportOptions = {
       // json: true,
-      datePattern: "YYYY-MM-DD",
-      maxFiles: "14d",
-      maxSize: "20m",
+      datePattern: 'YYYY-MM-DD',
+      maxFiles: '14d',
+      maxSize: '20m',
       zippedArchive: true,
     };
 
@@ -107,7 +107,7 @@ class Logger {
       return `${info.level} [${new Date()
         .toISOString()
         .slice(0, 23)
-        .replace("T", " ")}]: ${info.message}`;
+        .replace('T', ' ')}]: ${info.message}`;
     });
 
     return msg;
