@@ -25,8 +25,9 @@ This is a startpack for a nodejs server running on Koa framework.
   3. color, and level for debug, error and http, and server using camelCase -- debugColor, debugLevel.
 
 - Manage options for cors, helmet and morgan in their various file in src/config/middleware
-- compile TS to JS by running `gulp`
-- `node dist/server.js` or `npm run start` or `npm run server` or `npm run debug` for vscode
+- run `npm run server` to gulp and run server;
+- run `npm run lint` to check for errors
+-
 
 ## NOTE
 
