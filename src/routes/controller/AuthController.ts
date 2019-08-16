@@ -2,6 +2,10 @@ import { BaseContext } from 'koa';
 import { IResponse } from '../../typings';
 
 export class AuthController {
+  /**
+   * FIXME: remove test route once other routes are added.
+   * test with mocha, and chai
+   */
   public static test(ctx: BaseContext) {
     try {
       const res = {} as IResponse;

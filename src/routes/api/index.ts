@@ -1,5 +1,5 @@
 import * as Router from 'koa-router';
-import AuthApi from './AuthApi';
+import AuthApi from './Auth.API';
 
 export default class Api {
   private readonly index = new Router({ prefix: '/api' });
