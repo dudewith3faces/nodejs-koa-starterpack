@@ -31,8 +31,21 @@ gulp.task('html', function() {
   return gulp.src('src/**/*.html').pipe(gulp.dest('dist'));
 });
 
+// Gulp task to copy css files to output directory
+gulp.task('css', function() {
+  return gulp.src('src/**/*.css').pipe(gulp.dest('dist'));
+});
+
+// Gulp task to copy ssl cetificat files to output directory
+gulp.task('ssl', function() {
+  return gulp.src('src/**/*.pem').pipe(gulp.dest('dist'));
+});
+
 gulp.task('clean', function(cb) {
   return del('dist/**', { force: true });
 });
 
-gulp.task('default', gulp.series('clean', 'html', 'transpile', 'watch'));
+gulp.task(
+  'default',
+  gulp.series('clean', 'ssl', 'css', 'html', 'transpile', 'watch'),
+);
