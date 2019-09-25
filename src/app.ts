@@ -1,12 +1,15 @@
+import { createServer } from 'https';
 import {
   app,
   cors,
+  env,
   helmet,
   hostname,
   httpsRedirect,
   morgan,
   PORT,
   setError,
+  sslOpt,
 } from './config';
 import Api from './routes/api';
 import { Emit, Events } from './services';
@@ -15,10 +18,6 @@ export default class App {
   private readonly api = new Api().route();
   constructor() {
     this.build();
-  }
-
-  public startApp() {
-    return app;
   }
 
   private build() {
@@ -44,9 +43,10 @@ export default class App {
     (() => new Events())();
   }
 
-  private listen() {
+  private async listen() {
     try {
-      app.listen(PORT, hostname);
+      if (env === 'dev') app.listen(PORT, hostname);
+      else createServer(sslOpt, app.callback()).listen(PORT, hostname);
       Emit.connected();
     } catch (e) {
       Emit.error(e);
