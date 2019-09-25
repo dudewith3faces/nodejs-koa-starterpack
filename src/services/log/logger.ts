@@ -1,20 +1,20 @@
 import { createLogger, format, transports } from 'winston';
 import * as DailyRotateFile from 'winston-daily-rotate-file';
-import { env, logs } from '../../config';
+import { env, log } from '../../config';
 
 const levels = {
-  [logs.error.level]: 0,
+  [log.error.level]: 0,
   warn: 1,
-  [logs.debug.level]: 2,
-  [logs.server.level]: 3,
-  [logs.http.level]: 4,
+  [log.debug.level]: 2,
+  [log.server.level]: 3,
+  [log.http.level]: 4,
 };
 
 const colors = {
-  [logs.error.level]: logs.error.color,
-  [logs.debug.level]: logs.debug.color,
-  [logs.server.level]: logs.server.color,
-  [logs.http.level]: logs.http.color,
+  [log.error.level]: log.error.color,
+  [log.debug.level]: log.debug.color,
+  [log.server.level]: log.server.color,
+  [log.http.level]: log.http.color,
 };
 
 const { combine, timestamp, prettyPrint, colorize } = format;
@@ -27,7 +27,7 @@ class Logger {
   }
 
   public error(message: string) {
-    this.log(this.errorTrans()).log(logs.error.level, message);
+    this.log(this.errorTrans()).log(log.error.level, message);
   }
 
   public info(message: string) {
@@ -35,32 +35,30 @@ class Logger {
   }
 
   public http(message: string) {
-    this.log(this.httpTrans()).log(logs.http.level, message);
+    this.log(this.httpTrans()).log(log.http.level, message);
   }
 
   private errorTrans() {
-    const trans: any[] = [new DailyRotateFile({ ...this.opt, ...logs.error })];
+    const trans: any[] = [new DailyRotateFile({ ...this.opt, ...log.error })];
 
-    if (env === 'dev') {
-      trans.push(this.console(logs.error.level));
-    }
+    if (env === 'dev') trans.push(this.console(log.error.level));
 
     return trans;
   }
 
   private debugTrans() {
     return [
-      new DailyRotateFile({ ...this.opt(), ...logs.debug }),
-      this.console(logs.debug.level),
+      new DailyRotateFile({ ...this.opt(), ...log.debug }),
+      this.console(log.debug.level),
     ];
   }
 
   private serverTrans() {
-    return [new DailyRotateFile({ ...this.opt, ...logs.server })];
+    return [new DailyRotateFile({ ...this.opt, ...log.server })];
   }
 
   private httpTrans() {
-    return [new DailyRotateFile({ ...this.opt, ...logs.http })];
+    return [new DailyRotateFile({ ...this.opt, ...log.http })];
   }
 
   private log(trans: any[]) {
@@ -76,10 +74,10 @@ class Logger {
     this.httpTrans();
     if (env === 'dev') {
       this.infoFunc = this.debugTrans();
-      this.infoLevel = logs.debug.level;
+      this.infoLevel = log.debug.level;
     } else {
       this.infoFunc = this.serverTrans();
-      this.infoLevel = logs.server.level;
+      this.infoLevel = log.server.level;
     }
   }
 
