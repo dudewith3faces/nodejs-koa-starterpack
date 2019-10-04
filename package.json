@@ -57,5 +57,11 @@
   },
   "bugs": {
     "url": "https://github.com/dudewith3faces/nodejs-koa-starterpack/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
   }
 }
