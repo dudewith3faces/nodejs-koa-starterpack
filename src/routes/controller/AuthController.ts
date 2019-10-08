@@ -1,5 +1,5 @@
 import { BaseContext } from 'koa';
-import { IResponse } from '../../typings';
+import { IResponse } from '../../interface';
 
 export class AuthController {
   /**
