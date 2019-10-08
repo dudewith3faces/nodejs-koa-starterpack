@@ -21,6 +21,7 @@ gulp.task('watch', () => {
   gulp.watch('src/**/*.ts', gulp.series('transpile'));
   gulp.watch('src/**/*.html', gulp.series('html'));
   gulp.watch('src/**/*.css', gulp.series('css'));
+  gulp.watch('src/**/*.pem', gulp.series('pem'));
 });
 
 gulp.task('assets', function() {
