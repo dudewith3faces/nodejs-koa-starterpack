@@ -13,24 +13,23 @@ export class AuthAPITest {
   }
 
   private req() {
-    return request(`localhost:${PORT}/api`);
+    return request(`localhost:${PORT}/api/auth`);
   }
 
   private test() {
-    it('GET /api/auth/test', (done) => {
-      this.req()
-        .get('/auth/test')
-        .end((err, res) => {
-          assert.isNull(err);
-          assert.equal(res.status, 200, 'reponse should be 200');
-          assert.isObject(res.body);
-          assert.equal(
-            res.body.msg,
-            'auth test route work',
-            "msg should be 'auth test route work'",
-          );
-          done();
-        });
+    it('GET /api/auth/test', async () => {
+      try {
+        const { status, body } = await this.req().get('/test');
+        assert.equal(status, 200, 'reponse should be 200');
+        assert.isObject(body);
+        assert.equal(
+          body.msg,
+          'auth test route work',
+          "msg should be 'auth test route work'",
+        );
+      } catch (e) {
+        assert.isNull(e);
+      }
     });
   }
 }
