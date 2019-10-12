@@ -2,7 +2,7 @@ import { should, use } from 'chai';
 import chaiHTTP = require('chai-http');
 import App from '../src/app';
 
-class Server {
+class ServerTest {
   constructor() {
     this.build();
   }
@@ -14,4 +14,4 @@ class Server {
   }
 }
 
-(() => new Server())();
+(() => new ServerTest())();
