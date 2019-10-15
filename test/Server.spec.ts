@@ -1,6 +1,6 @@
-import { should, use } from 'chai';
+import { assert, should, use } from 'chai';
 import chaiHTTP = require('chai-http');
-import App from '../src/app';
+import { server } from '../src/server';
 
 class ServerTest {
   constructor() {
@@ -8,10 +8,21 @@ class ServerTest {
   }
 
   private build() {
-    (() => new App())();
     use(chaiHTTP);
     should();
+    this.server();
+  }
+
+  private server() {
+    it('start', () => {
+      try {
+        // const res = server;
+        assert.isObject(server);
+      } catch (e) {
+        assert.isNull(e);
+      }
+    });
   }
 }
 
-(() => new ServerTest())();
+describe('SERVER', () => new ServerTest());

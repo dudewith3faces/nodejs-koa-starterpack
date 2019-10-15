@@ -1,4 +1,5 @@
 import { createServer } from 'https';
+import { API, Emit, Events } from './components';
 import {
   app,
   cors,
@@ -11,11 +12,9 @@ import {
   setError,
   sslOpt,
 } from './config';
-import Api from './routes/api';
-import { Emit, Events } from './services';
 
 export default class App {
-  private readonly api = new Api().route();
+  private readonly api = new API().route();
   constructor() {
     this.build();
   }

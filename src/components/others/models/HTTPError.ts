@@ -1,4 +1,4 @@
-import { IResponse } from '../../interface';
+import { IResponse } from '../../../interface';
 
 export class HTTPError implements Partial<Error> {
   constructor(

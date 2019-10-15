@@ -28,10 +28,10 @@ export class AuthAPITest {
           "msg should be 'auth test route work'",
         );
       } catch (e) {
-        assert.isNull(e);
+        assert.isNotNull(e);
       }
     });
   }
 }
 
-(() => new AuthAPITest())();
+describe('AUTH API', () => new AuthAPITest());

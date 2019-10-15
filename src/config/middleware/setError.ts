@@ -1,6 +1,6 @@
 import { BaseContext } from 'koa';
+import { HTTPError } from '../../components';
 import { IResponse } from '../../interface';
-import { HTTPError } from '../../models';
 
 export const setError = async (ctx: BaseContext, next: () => Promise<any>) => {
   try {

@@ -1,5 +1,5 @@
 import * as Morgan from 'koa-morgan';
-import { Emit } from '../../services';
+import { Emit } from '../../components';
 
 export const morgan = Morgan('combined', {
   stream: {

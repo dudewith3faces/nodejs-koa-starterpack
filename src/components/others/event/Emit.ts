@@ -1,4 +1,4 @@
-import { app } from '../../config';
+import { app } from '../../../config';
 
 export class Emit {
   public static connected() {

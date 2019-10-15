@@ -1,5 +1,5 @@
-import { app, PORT } from '../../config';
-import { logger } from '../log/logger';
+import { app, PORT } from '../../../config';
+import { logger } from '../logger';
 
 export class Events {
   constructor() {
