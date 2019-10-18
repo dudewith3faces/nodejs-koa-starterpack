@@ -1,6 +1,6 @@
 import { createLogger, format, transports } from 'winston';
 import * as DailyRotateFile from 'winston-daily-rotate-file';
-import { env, log } from '../../config';
+import { env, log } from '../../../config';
 
 const levels = {
   [log.error.level]: 0,
@@ -26,8 +26,8 @@ class Logger {
     this.run();
   }
 
-  public error(message: string) {
-    this.log(this.errorTrans()).log(log.error.level, message);
+  public error(message: any) {
+    this.log(this.errorTrans()).log(log.error.level, JSON.stringify(message));
   }
 
   public info(message: string) {

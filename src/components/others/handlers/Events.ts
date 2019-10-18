@@ -1,5 +1,5 @@
 import { app, PORT } from '../../../config';
-import { logger } from '../logger';
+import { logger } from './logger';
 
 export class Events {
   constructor() {
@@ -15,5 +15,6 @@ export class Events {
     app.on('http', (message: string) => logger.http(message));
     app.on('error', (error) => logger.error(error));
     app.on('log', (msg: string) => logger.info(msg));
+    process.on('unhandledRejection', (error) => logger.error(error));
   }
 }
