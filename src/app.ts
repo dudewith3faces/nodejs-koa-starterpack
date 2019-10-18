@@ -7,6 +7,7 @@ import {
   helmet,
   hostname,
   httpsRedirect,
+  listener,
   morgan,
   PORT,
   setError,
@@ -19,14 +20,14 @@ export default class App {
     this.build();
   }
 
-  private build() {
+  private build(): void {
     this.event();
     this.middleware();
     this.route();
     this.listen();
   }
 
-  private middleware() {
+  private middleware(): void {
     app.use(httpsRedirect);
     app.use(cors);
     app.use(helmet);
@@ -34,19 +35,19 @@ export default class App {
     app.use(setError);
   }
 
-  private route() {
+  private route(): void {
     app.use(this.api);
   }
 
-  private event() {
+  private event(): void {
     (() => new Events())();
   }
 
-  private async listen() {
+  private listen(): void {
     try {
-      if (env === 'dev') app.listen(PORT, hostname);
-      else createServer(sslOpt, app.callback()).listen(PORT, hostname);
-      Emit.connected();
+      if (env === 'dev') app.listen(PORT, hostname, listener);
+      else
+        createServer(sslOpt, app.callback()).listen(PORT, hostname, listener);
     } catch (e) {
       Emit.error(e);
     }

@@ -1,4 +1,5 @@
 import { BaseContext } from 'koa';
+import { Emit } from '../../components';
 import { env } from '../keys';
 
 export const httpsRedirect = async (
@@ -18,3 +19,5 @@ export const httpsRedirect = async (
     throw e;
   }
 };
+
+export const listener = (): void => Emit.connected();
