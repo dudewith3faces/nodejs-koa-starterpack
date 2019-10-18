@@ -10,7 +10,7 @@
     "test": "mocha -r ts-node/register test/**/*.ts --exit || true",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
     "prettier": "prettier -c src/**/* test/**/*",
-    "precommit": "npm run lint",
+    "precommit": "npm run prettier && npm run lint",
     "prepush": "npm test"
   },
   "author": "Rilwan Adams <adamzrealone@gmail.com>",
