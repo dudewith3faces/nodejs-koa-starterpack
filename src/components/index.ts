@@ -1,2 +1,2 @@
-export { API } from './api';
+export * from './Api';
 export * from './others';

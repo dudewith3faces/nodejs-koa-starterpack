@@ -1,5 +1,5 @@
 import * as Router from 'koa-router';
-import { AuthController } from './controller';
+import { AuthController } from './Controller';
 
 export class AuthAPI {
   private readonly router = new Router({ prefix: '/auth' });
