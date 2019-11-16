@@ -1,23 +1,21 @@
 import { BaseContext } from 'koa';
-import { HTTPError } from '../../components';
-import { IResponse } from '../../interface';
+import { BaseError, InternalError } from '../../components';
 
 export const setError = async (ctx: BaseContext, next: () => Promise<any>) => {
   try {
     await next();
   } catch (e) {
-    if (e instanceof HTTPError) {
-      const { status, error } = e;
+    if (e instanceof BaseError) {
+      const { status, message } = e;
       ctx.status = status;
-      ctx.body = error;
+      ctx.body = message;
     } else {
-      const err = {} as IResponse;
-      err.msg = 'Error occured. Please try again later;';
+      const err = new InternalError();
 
       ctx.app.emit('err', e);
 
-      ctx.status = 500;
-      ctx.body = err;
+      ctx.status = err.status;
+      ctx.body = err.message;
     }
   }
 };
