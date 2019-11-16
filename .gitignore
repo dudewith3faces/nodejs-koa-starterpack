@@ -11,3 +11,5 @@ Logs/
 !.vscode/extensions.json
 *.code-workspace
 .env
+yarn.lock
+yarn-error.log
