@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+.idea
+package-lock.json
+dist/
+Logs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+yarn.lock
+yarn-error.log
