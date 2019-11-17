@@ -12,3 +12,9 @@ Logs/
 *.code-workspace
 yarn.lock
 yarn-error.log
+.editorconfig
+.gitignore
+.prettierignore
+.prettierrc.json
+README.md
+LICENSE
