@@ -6,7 +6,7 @@ const del = require('del');
 const tsProject = ts.createProject('tsconfig.json');
 
 const JSON_FILES = ['src/*.json', 'src/**/*.json'];
-const OUTPUT_DIR = 'dist'
+const OUTPUT_DIR = 'dist';
 
 gulp.task('transpile', () => {
   const tsResult = tsProject
@@ -49,7 +49,4 @@ gulp.task('clean', function(cb) {
   return del(`${OUTPUT_DIR}/**`, { force: true });
 });
 
-gulp.task(
-  'default',
-  gulp.series('clean', 'ssl', 'css', 'html', 'transpile', 'watch'),
-);
+gulp.task('default', gulp.series('clean', 'ssl', 'css', 'html', 'transpile'));
