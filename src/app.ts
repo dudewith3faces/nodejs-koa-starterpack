@@ -1,16 +1,12 @@
 import { createServer } from 'https';
 import { API, Emit, Events } from './components';
 import {
+  allMiddleware,
   app,
-  cors,
   env,
-  helmet,
   hostname,
-  httpsRedirect,
   listener,
-  morgan,
   PORT,
-  setError,
   sslOpt,
 } from './config';
 
@@ -28,11 +24,7 @@ export default class App {
   }
 
   private middleware(): void {
-    app.use(httpsRedirect);
-    app.use(cors);
-    app.use(helmet);
-    app.use(morgan);
-    app.use(setError);
+    app.use(allMiddleware);
   }
 
   private route(): void {

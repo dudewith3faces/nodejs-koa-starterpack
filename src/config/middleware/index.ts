@@ -1,6 +1,17 @@
-export { cors } from './cors';
-export { helmet } from './helmet';
-export { httpsRedirect, listener } from './httpsRedirect';
+import * as compose from 'koa-compose';
+import { cors } from './cors';
+import { helmet } from './helmet';
+import { httpsRedirect } from './httpsRedirect';
+import { morgan } from './morgan';
+import { setError } from './setError';
+
 export { app } from './koa';
-export { morgan } from './morgan';
-export { setError } from './setError';
+export { listener } from './httpsRedirect';
+
+export const allMiddleware = compose([
+  httpsRedirect,
+  cors,
+  helmet,
+  morgan,
+  setError,
+]);
