@@ -11,7 +11,8 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
     "prettier": "prettier -c src/**/* test/**/*",
     "precommit": "npm run prettier && npm run lint",
-    "prepush": "npm test"
+    "prepush": "npm test",
+    "build": "gulp"
   },
   "author": "Rilwan Adams <adamzrealone@gmail.com>",
   "license": "ISC",
