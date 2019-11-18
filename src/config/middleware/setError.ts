@@ -1,5 +1,5 @@
 import { BaseContext } from 'koa';
-import { BaseError, InternalError } from '../../components';
+import { BaseError, Emit, InternalError } from '../../components';
 
 export const setError = async (ctx: BaseContext, next: () => Promise<any>) => {
   try {
@@ -10,12 +10,12 @@ export const setError = async (ctx: BaseContext, next: () => Promise<any>) => {
       ctx.status = status;
       ctx.body = message;
     } else {
-      const err = new InternalError();
+      Emit.error(e);
 
-      ctx.app.emit('err', e);
+      const { status, message } = new InternalError();
 
-      ctx.status = err.status;
-      ctx.body = err.message;
+      ctx.status = status;
+      ctx.body = message;
     }
   }
 };
