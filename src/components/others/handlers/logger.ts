@@ -48,7 +48,7 @@ class Logger {
 
   private debugTrans() {
     return [
-      new DailyRotateFile({ ...this.opt(), ...log.debug }),
+      new DailyRotateFile({ ...this.opt, ...log.debug }),
       this.console(log.debug.level),
     ];
   }
@@ -89,7 +89,7 @@ class Logger {
   }
 
   private opt() {
-    const opt: DailyRotateFile.DailyRotateFileTransportOptions = {
+    const opt: Partial<DailyRotateFile.DailyRotateFileTransportOptions> = {
       // json: true,
       datePattern: 'YYYY-MM-DD',
       maxFiles: '14d',
