@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import { AuthController } from './Controller';
 
 export class AuthAPI {

@@ -1,4 +1,4 @@
-import * as compose from 'koa-compose';
+import compose from 'koa-compose';
 import { cors } from './cors';
 import { helmet } from './helmet';
 import { httpsRedirect } from './httpsRedirect';

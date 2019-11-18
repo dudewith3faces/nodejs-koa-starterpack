@@ -1,5 +1,5 @@
 import { IHelmetConfiguration } from 'helmet';
-import * as Helmet from 'koa-helmet';
+import Helmet from 'koa-helmet';
 
 const options: IHelmetConfiguration = {
   // hidePoweredBy: { setTo: "PHP/5.6.33" },

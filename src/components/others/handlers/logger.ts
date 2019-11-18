@@ -1,5 +1,5 @@
 import { createLogger, format, transports } from 'winston';
-import * as DailyRotateFile from 'winston-daily-rotate-file';
+import DailyRotateFile from 'winston-daily-rotate-file';
 import { env, log } from '../../../config';
 
 const levels = {

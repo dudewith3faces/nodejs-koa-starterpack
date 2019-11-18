@@ -1,4 +1,4 @@
-import * as Morgan from 'koa-morgan';
+import Morgan from 'koa-morgan';
 import { Emit } from '../../components';
 
 export const morgan = Morgan('combined', {

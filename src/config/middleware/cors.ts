@@ -1,4 +1,4 @@
-import * as Cors from 'koa2-cors';
+import Cors from 'koa2-cors';
 import { origin } from '../keys/server';
 
 const options: Cors.Options = {
