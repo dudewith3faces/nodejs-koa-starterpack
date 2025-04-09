@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "8.2.0",
-    "koa": "2.11.0",
+    "koa": "2.16.1",
     "koa-compose": "^4.1.0",
     "koa-helmet": "^5.2.0",
     "koa-morgan": "^1.0.1",
